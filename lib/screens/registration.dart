@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:getmywater/constants.dart';
 import 'package:getmywater/components/rounded_button.dart';
-import 'package:getmywater/screens/otp_screen.dart';
+import 'package:getmywater/network/model/User.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class Registration extends StatefulWidget {
@@ -61,6 +64,7 @@ class _RegistrationScreenState extends State<Registration> {
                         Navigator.pushReplacementNamed(context, OTPverification.id)
                         }
                 );
+                fetchAlbum();
               //  Navigator.pushNamed(context, OTPverification.id);
               },
             ),
@@ -71,4 +75,15 @@ class _RegistrationScreenState extends State<Registration> {
       ),
     );
   }
+  Future<User> fetchAlbum() async {
+    final response = await http.get(Uri.https('jsonplaceholder.typicode.com', 'albums/1'));
+    if (response.statusCode == 200) {
+      var kk =  User.fromJson(jsonDecode(response.body));
+      developer.log("vijesh id="+kk.title);
+    } else {
+      throw Exception('Failed to load album');
+    }
+    }
+
+
 }

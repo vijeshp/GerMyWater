@@ -1,12 +1,15 @@
-/*
-import 'package:floor/floor.dart';
+import 'dart:ffi';
 
+import 'package:floor/floor.dart';
 @entity
-class Person {
+class Address {
   @primaryKey
   final int id;
+  final String flat;
+  final String street;
+  final String additional;
+  final double lat;
+  final double long;
 
-  final String name;
-
-  Person(this.id, this.name);
-}*/
+  Address(this.id, this.flat,this.street,this.additional,this.lat,this.long);
+}
